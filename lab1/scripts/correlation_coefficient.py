@@ -19,7 +19,7 @@ for i in range(len(x)):
 
 syi2 = 0
 for i in range(len(x)):
-  syi2 += (x[i] - xm)**2
+  syi2 += (y[i] - ym)**2
 
 r = sxyi / (sqrt(sxi2) * sqrt(syi2))
 print(r)

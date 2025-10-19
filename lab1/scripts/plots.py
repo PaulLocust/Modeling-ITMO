@@ -84,7 +84,7 @@ def plot_autocorrelation(data, lag=10):
 
 def main():
     # Чтение данных
-    data = read_data('data.txt')
+    data = read_data('data_generated.txt')
 
     # Исследование для выборок разных размеров
     sample_sizes = [10, 20, 50, 100, 200, 300]

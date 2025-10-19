@@ -75,17 +75,31 @@ plt.grid()
 plt.show()
 
 # Автокорреляционный анализ
-def autocorrelation(x):
+def autocorrelation(x, max_lag=10):
+    """
+    Корректный расчет автокорреляционной функции
+    """
     n = len(x)
-    result = np.correlate(x - np.mean(x), x - np.mean(x), mode='full')
-    return result[result.size // 2:] / (np.var(x, ddof=1) * n)
+    x_normalized = x - np.mean(x)
+    acf_values = []
+
+    for lag in range(max_lag + 1):
+        if lag == 0:
+            acf_values.append(1.0)  # ACF(0) всегда = 1
+        else:
+            # Для лага k используем n-k точек
+            numerator = np.sum(x_normalized[lag:] * x_normalized[:-lag])
+            denominator = np.sum(x_normalized ** 2)
+            acf_values.append(numerator / denominator)
+
+    return acf_values[1:]  # возвращаем с лага 1
 
 autocorr_values = autocorrelation(data)
 
 print(autocorr_values[1:11])
 
 plt.figure(figsize=(12, 6))
-plt.stem(autocorr_values[1:11], use_line_collection=True)
+plt.stem(autocorr_values[1:11])
 plt.title('Автокорреляция')
 plt.xlabel('Лаг')
 plt.ylabel('Коэффициент автокорреляции')
@@ -118,7 +132,7 @@ plt.show()
 autocorr_generated = autocorrelation(generated_data)
 
 plt.figure(figsize=(12, 6))
-plt.stem(autocorr_generated[:20], use_line_collection=True)
+plt.stem(autocorr_generated[:20])
 plt.title('Автокорреляция сгенерированных данных')
 plt.xlabel('Лаг')
 plt.ylabel('Коэффициент автокорреляции')

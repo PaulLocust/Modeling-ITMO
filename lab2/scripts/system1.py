@@ -129,11 +129,13 @@ def calculate_characteristics_system1():
     w_q1 = 0.0  # У П1 нет очереди
     w_q2 = l_q2 / lam_eff2 if lam_eff2 > 0 else 0.0  # Время ожидания у П2
     w_q3 = 0.0  # У П3 нет очереди
+    w_q_total = l_q_total / lam_eff_total
 
     print("\nВремя ожидания:")
     print(f"  П1: W_q1 = 0 (нет очереди)")
     print(f"  П2: W_q2 = L_q2 / λ′₂ = {l_q2:.4f} / {lam_eff2:.4f} = {w_q2:.4f} с")
     print(f"  П3: W_q3 = 0 (нет очереди)")
+    print(f"  Общее: Wq = L_q / λ′ = {l_q_total:.4f} / {lam_eff_total:.4f} = {w_q_total:.4f} с")
 
     # 8. ВРЕМЯ ПРЕБЫВАНИЯ
     w1 = m1 / lam_eff1 if lam_eff1 > 0 else 0.0  # Время пребывания у П1
@@ -142,10 +144,10 @@ def calculate_characteristics_system1():
     w_total = m_total / lam_eff_total if lam_eff_total > 0 else 0.0
 
     print("\nВремя пребывания:")
-    print(f"  П1: W₁ = M₁ / λ′₁ = {m1:.4f} / {lam_eff1:.4f} = {w1:.4f} с")
-    print(f"  П2: W₂ = M₂ / λ′₂ = {m2:.4f} / {lam_eff2:.4f} = {w2:.4f} с")
-    print(f"  П3: W₃ = M₃ / λ′₃ = {m3:.4f} / {lam_eff3:.4f} = {w3:.4f} с")
-    print(f"  Общее: W = M / λ′ = {m_total:.4f} / {lam_eff_total:.4f} = {w_total:.4f} с")
+    print(f"  П1: W₁ = W_q1 + b = {w_q1:.4f} + {b:.4f} = {w1:.4f} с")
+    print(f"  П2: W₂ = W_q2 + b = {w_q2:.4f} + {b:.4f} = {w2:.4f} с")
+    print(f"  П3: W₃ = W_q3 + b = {w_q3:.4f} + {b:.4f} = {w3:.4f} с")
+    print(f"  Общее: W = W_q + b = {w_q_total:.4f} + {b:.4f} = {w_total:.4f} с")
 
     # Проверка формулой Литтла
     print("\nПроверка формулой Литтла:")
@@ -167,7 +169,7 @@ def calculate_characteristics_system1():
         # Производительность
         'lam_eff1': lam_eff1, 'lam_eff2': lam_eff2, 'lam_eff3': lam_eff3, 'lam_eff_total': lam_eff_total,
         # Время ожидания
-        'w_q1': w_q1, 'w_q2': w_q2, 'w_q3': w_q3,
+        'w_q1': w_q1, 'w_q2': w_q2, 'w_q3': w_q3, 'w_q_total': w_q_total,
         # Время пребывания
         'w1': w1, 'w2': w2, 'w3': w3, 'w_total': w_total
     }

@@ -25,7 +25,7 @@ print(f"  b1' = {b1_prime:.4f}, μ1 = {mu1:.4f}")
 print(f"  b2' = {b2_prime:.4f}, μ2 = {mu2:.4f}")
 print(f"  q1 = {q1:.2f}, q2 = {q2:.2f}")
 
-# Правильные коды: (П11, П12, O1) - фазы прибора и очередь перед ним
+# Стационарные вероятности из отчета
 p_stationary = [0.0117, 0.0469, 0.0030, 0.1875, 0.0008, 0.7499, 0.0002]
 codes = [
     (0, 0, 0),  # S0: прибор свободен, очередь пуста
@@ -115,13 +115,10 @@ def calculate_characteristics_system2():
     print(f"  W_q = L_q / λ′ = {l_q:.4f} / {lam_eff:.4f} = {w_q:.4f} с")
 
     # 8. ВРЕМЯ ПРЕБЫВАНИЯ
-    if lam_eff > 0:
-        w_system = m_system / lam_eff
-    else:
-        w_system = 0
+    w_system = w_q + b  # Время пребывания = время ожидания + время обслуживания
 
     print("\nВремя пребывания:")
-    print(f"  W = M / λ′ = {m_system:.4f} / {lam_eff:.4f} = {w_system:.4f} с")
+    print(f"  W = W_q + b = {w_q:.4f} + {b:.4f} = {w_system:.4f} с")
 
     # Дополнительная информация о фазах
     rho11 = safe_sum(p11_busy)  # Загрузка фазы П11

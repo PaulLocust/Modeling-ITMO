@@ -31,7 +31,7 @@ def calculate_relative_difference(sys1, sys2):
     characteristics_better_lower = {
         'Вероятность потерь (π)': (sys1['p_loss_total'], sys2['p_loss_total']),
         'Ср. время пребывания (W)': (sys1['w_total'], sys2['w_total']),
-        'Ср. время ожидания (W_q)': (sys1['w_q2'], sys2['w_q']),
+        'Ср. время ожидания (W_q)': (sys1['w_q_total'], sys2['w_q']),
         'Ср. число заявок (M)': (sys1['m_total'], sys2['m_total']),
         'Длина очереди (L_q)': (sys1['l_q_total'], sys2['l_q_total'])
     }
@@ -125,7 +125,7 @@ def create_comparison_chart(sys1, sys2):
         sys1['m_total'],  # Число заявок суммарное
         sys1['p_loss_total'],  # Вероятность потерь общая
         sys1['lam_eff_total'],  # Производительность общая
-        sys1['w_q2'],  # Время ожидания (для П2, где есть очередь)
+        sys1['w_q_total'],  # Время ожидания (для П2, где есть очередь)
         sys1['w_total']  # Время пребывания общее
     ]
 
@@ -193,7 +193,7 @@ def compare_systems():
     print(f"{'Число заявок (M)':<25} {sys1['m_total']:<12.4f} {sys2['m_total']:<12.4f}")
     print(f"{'Вероятность потерь (π)':<25} {sys1['p_loss_total']:<12.4f} {sys2['p_loss_total']:<12.4f}")
     print(f"{'Производительность (λ′)':<25} {sys1['lam_eff_total']:<12.4f} {sys2['lam_eff_total']:<12.4f}")
-    print(f"{'Время ожидания (W_q)':<25} {sys1['w_q2']:<12.4f} {sys2['w_q']:<12.4f}")
+    print(f"{'Время ожидания (W_q)':<25} {sys1['w_q_total']:<12.4f} {sys2['w_q']:<12.4f}")
     print(f"{'Время пребывания (W)':<25} {sys1['w_total']:<12.4f} {sys2['w_total']:<12.4f}")
 
     # Расчет относительной разности
